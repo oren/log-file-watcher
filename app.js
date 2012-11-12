@@ -132,16 +132,18 @@ app.get('/poll/:filename', function(req, res){
 
 // set up socket.io
 var io = require('socket.io');
-var ws_server = io.listen(app, {
-	resource: 'watch',
-	flashPolicyServer: false,
-	transports: [
-		'websocket',
-		'htmlfile',
-		'xhr-multipart',
-		'xhr-polling'
-	]
-});
+var ws_server = io.listen(app);
+
+// var ws_server = io.listen(app, {
+// 	resource: 'watch',
+// 	flashPolicyServer: false,
+// 	transports: [
+// 		'websocket',
+// 		'htmlfile',
+// 		'xhr-multipart',
+// 		'xhr-polling'
+// 	]
+// });
 var LogWatcher = require('./lib/LogWatcher');
 ws_server.on('connection', function(client) {
   // there, client should be stored depending on what files they are
